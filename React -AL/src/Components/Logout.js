@@ -5,6 +5,7 @@ const Logout = (props) => {
     const logout = () => {
 
         window.sessionStorage.setItem("token", "notexists");
+        window.sessionStorage.setItem("email", "");
 
     }
 

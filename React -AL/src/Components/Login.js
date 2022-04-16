@@ -13,6 +13,7 @@ const Login = () => {
         var obj = { email: name, password: password };
         axios.post("http://127.0.0.1:8000/api/AdminLogin", obj)
             .then(resp => {
+                axios.get("http://127.0.0.1:8000/api/email")
                 var token = resp.data;
                 console.log(token);
                 var user = { userId: token.userid, access_token: token.token };
@@ -22,6 +23,7 @@ const Login = () => {
                 if (token.token != null) {
                     window.sessionStorage.setItem("token", "exists");
                     alert("Signin successful");
+                    window.sessionStorage.setItem("email", obj.email);
                     history.push("/serviceproviderdetails");
                 }
 

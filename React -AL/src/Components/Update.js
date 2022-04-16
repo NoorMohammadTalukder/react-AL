@@ -1,49 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, userEffect } from "react";
 import axios from "axios";
 
-const APIProducts = (props) => {
-    const [products, setProducts] = useState([]);
+const Update = () => {
 
-    useEffect(() => {
-        // axios.get("product/list")
-        axios.get("http://127.0.0.1:8000/api/updateCus")
-            .then(resp => {
-                console.log(resp.data);
-                setProducts(resp.data);
-            }).catch(err => {
-                console.log(err);
-                console.log("not found");
-            });
-    }, []);
-    // const cors = require('cors');
-    const order = () => {
-        // var obj = { email: name, password: password };
-        axios.get("http://127.0.0.1:8000/api/my-demo-mail")
-            .then(resp => {
-                // var token = resp.data;
-                console.log("email send");
-                // var user = { userId: token.userid, access_token: token.token };
-                // localStorage.setItem('email', JSON.stringify(user));
-                // console.log(localStorage.getItem('user'));
-            }).catch(err => {
-                console.log(err);
-            });
+    //let [token, setToken] = useState("");
+    let [name, setName] = useState("");
+    let [phone, setPhone] = useState("");
+    // let [email, setEmail] = useState("");
+    let [address, setAddress] = useState("");
+    // let [password, setPassword] = useState("");
+    var a = window.sessionStorage.getItem("token");
+
+    const updateSubmit = () => {
+        if (a == "exists") {
+            var email = window.sessionStorage.getItem("email");
+            var obj = { name: name, phone: phone, email: email, address: address };
+            axios.post("http://127.0.0.1:8000/api/AdminUpdate", obj)
+                .then(resp => {
+
+                    alert("Update Successful");
+                }).catch(err => {
+                    console.log(err);
+                    alert(err);
+                });
 
 
+        }
     }
 
 
     return (
         <div>
-            <h1> See all Products</h1>
-            <ul>
-                {
-                    // products.map(p => (
-                    //     <li key={p.id}>Service id: {p.id} Service Name: {p.userid}  <button onClick={order}>Order</button> </li>
-                    // ))
-                }
-            </ul>
+            <h1>Update Admin</h1>
+            <form>
+                Enter  Name:<input type="text" value={name} onChange={(e) => setName(e.target.value)}></input><br></br>
+                Enter Phone: <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)}></input><br></br>
+
+                Enter Address: <input type="text" value={address} onChange={(e) => setAddress(e.target.value)}></input><br></br>
+
+
+            </form>
+            <button onClick={updateSubmit}>Update Admin</button>
+
         </div>
+
     )
+
 }
-export default APIProducts; 
+
+export default Update; 

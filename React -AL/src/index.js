@@ -8,6 +8,7 @@ import Login from './Components/Login';
 import Registration from './Components/Registration';
 import ServiceProviderDetails from './Components/ServiceProviderDetails';
 import Logout from './Components/Logout';
+import Update from './Components/Update';
 import axios from 'axios';
 
 var token = null;
@@ -35,6 +36,9 @@ ReactDOM.render(
         </Route>
         <Route exact path="/Registration">
           <Registration />
+        </Route>
+        <Route exact path="/update">
+          <Update />
         </Route>
         <Route exact path="/logout">
           <Logout />
